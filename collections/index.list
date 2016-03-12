@@ -1,0 +1,89 @@
+{.section collection}
+
+  {.repeated section collections}
+
+    {.equal? typeName "gallery"}
+
+      <section id="{urlId}" class="Index-gallery" sqs-controller="Template.Controllers.IndexGallery" data-collection-id="{id}">
+
+        {.if items.0}<div class="Index-gallery-inner clear" data-index-gallery-images="9">{.end}
+
+        {.repeated section items}
+
+          {.equal? @index 10}</div><div class="Index-gallery-inner clear" data-index-gallery-images="9">{.end}
+          {.equal? @index 19}</div><div class="Index-gallery-inner clear" data-index-gallery-images="9">{.end}
+          {.equal? @index 28}</div><div class="Index-gallery-inner clear" data-index-gallery-images="9">{.end}
+          {.equal? @index 37}</div><div class="Index-gallery-inner clear" data-index-gallery-images="9">{.end}
+          {.equal? @index 46}</div><div class="Index-gallery-inner clear" data-index-gallery-images="9">{.end}
+          {.equal? @index 55}</div><div class="Index-gallery-inner clear" data-index-gallery-images="9">{.end}
+          {.equal? @index 64}</div><div class="Index-gallery-inner clear" data-index-gallery-images="9">{.end}
+          {.equal? @index 73}</div><div class="Index-gallery-inner clear" data-index-gallery-images="9">{.end}
+          {.equal? @index 82}</div><div class="Index-gallery-inner clear" data-index-gallery-images="9">{.end}
+          {.equal? @index 91}</div><div class="Index-gallery-inner clear" data-index-gallery-images="9">{.end}
+          {.equal? @index 100}</div><div class="Index-gallery-inner clear" data-index-gallery-images="9">{.end}
+
+          <article class="Index-gallery-item"{.video?} sqs-controller="Template.Controllers.IndexGalleryVideo"{.end}>
+
+            <div class="Index-gallery-item-inner">
+
+              {.if title || body}
+                <div class="Index-gallery-item-content">
+                  {.section title}<h2 class="Index-gallery-item-content-heading">{@}</h2>{.end}
+                  {.section body}<div class="Index-gallery-item-content-body">{@}</div>{.end}
+                  {.section clickthroughUrl}<a href="{@}" class="Index-gallery-item-content-link"></a>{.end}
+                  {.video?}<a href="#" class="Index-gallery-item-content-link"></a>{.end}
+                </div>
+              {.end}
+
+              {.section clickthroughUrl}
+                <a href="{@}" class="Index-gallery-item-image">
+              {.or}
+                {.video?}
+                  <a href="#" class="Index-gallery-item-image">
+                {.or}
+                  <figure class="Index-gallery-item-image">
+                {.end}
+              {.end}
+                <img {@|image-meta} data-load="false" />
+              {.section clickthroughUrl}
+                </a>
+              {.or}
+                {.video?}
+                  </a>
+                {.or}
+                  </figure>
+                {.end}
+              {.end}
+
+              {.video?}
+                {@|video}
+              {.end}
+            
+            </div>
+
+          </article>
+
+        {.end}
+
+        {.if items.0}</div>{.end}
+
+      </section>
+
+    {.or}
+
+      <section id="{urlId}" class="Index-page{.section mainImage} Index-page--has-image{.end}" {.section mainImage} data-parallax-original-element{.end} data-collection-id="{id}" data-parallax-id="{id}" data-edit-main-image="Background">
+        <div class="Index-page-content {.section mainImage} sqs-alternate-block-style-container{.end}">
+          {mainContent}
+        </div>
+        {.section mainImage}
+          <figure class="Index-page-image" data-parallax-image-wrapper><img {@|image-meta} data-load="false" /></figure>
+        {.end}
+      </section>
+
+    {.end}
+
+
+
+  {.end}
+
+{.end}

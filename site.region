@@ -1,0 +1,168 @@
+<!doctype html>
+<html {.if authenticatedAccount}data-authenticated-account{.end}>
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="initial-scale=1">
+
+    {squarespace-headers}
+  </head>
+  <body id="{squarespace.page-id}" class="{squarespace.page-classes}{.if website.logoImageUrl} has-logo-image{.or} has-site-title{.end}{.if website.siteTagLine} has-tagline{.end}{.if showCart} has-cart{.end}{.if item}{.or}{.equal? collection.typeName "index"}{.section collection}{.repeated section collections}{.if mainImage} has-parallax-images{.end}{.end}{.end}{.or}{.if collection.mainImage} has-parallax-images{.end}{.end}{.end} enable-load-effects" sqs-controller="Template.Controllers.NavigationState">
+
+    {@|apply mobile.block}
+
+    {.equal? collection.typeName "index"}
+      <div class="Parallax-host" data-parallax-host>
+        {.section collection}
+          {.repeated section collections}
+            {.if mainImage}
+              <div class="Parallax-item" data-parallax-item data-parallax-id="{id}"></div>
+            {.end}
+          {.end}
+        {.end}
+      </div>
+
+    {.or}
+
+      {.if item}{.or}
+        {.section collection}
+          {.if mainImage}
+            <div class="Parallax-host" data-parallax-host>
+              <div class="Parallax-item" data-parallax-item data-parallax-id="{id}"></div>
+            </div>
+          {.end}
+        {.end}
+      {.end}
+    {.end}
+
+    <div class="Site sqs-announcement-bar-dropzone" data-nc-base="header" data-nc-min="640" data-nc-collapsible sqs-controller="Template.Controllers.Ancillary">
+
+      <header class="Header Header--top">
+        <div class="Header-inner Header-inner--top" data-nc-group="top">
+          <div data-nc-container="top-left">
+            
+            <div class="Header-search" data-nc-element="search">
+              <form class="Header-search-form" action="/search" method="get">
+                <input class="Header-search-form-input" name="q" type="text" spellcheck="false" value="" autocomplete="off" placeholder="Search" />
+                <button class="Header-search-form-submit" type="submit">
+                  <svg class="Icon Icon--search--small" viewBox="0 0 20 20">
+                    <use xlink:href="/assets/ui-icons.svg#search-icon--small"></use>
+                  </svg>
+                  <svg class="Icon Icon--search" viewBox="0 0 20 20">
+                    <use xlink:href="/assets/ui-icons.svg#search-icon"></use>
+                  </svg>
+                </button>
+              </form>
+            </div>
+
+          </div>
+          <div data-nc-container="top-center">
+          </div>
+          <div data-nc-container="top-right">
+            
+            {@|apply cart.block}
+
+          </div>
+        </div>
+      </header>
+
+      <div class="Site-inner{.equal? collection.typeName "index"} Site-inner--index{.end}"{.equal? collection.typeName "index"}{.section collection} sqs-controller="Template.Controllers.Parallax{.section collections.0}{.if mainImage}, Template.Controllers.OverlayOffset{.end}{.end}"{.end}{.or}{.if item}{.or}{.if collection.mainImage} sqs-controller="Template.Controllers.OverlayOffset, Template.Controllers.Parallax"{.end}{.end}{.end}>
+
+        <header class="Header Header--bottom{.if item}{.or}{.equal? collection.typeName "index"}{.section collection}{.section collections.0}{.if mainImage} Header--overlay{.or}{.equal? typeName "gallery"} Header--overlay{.end}{.end}{.end}{.end}{.or}{.if collection.mainImage} Header--overlay{.end}{.end}{.end}">
+          <div class="Header-inner Header-inner--bottom" data-nc-group="bottom">
+            <div data-nc-container="bottom-left">
+              <nav class="Header-nav Header-nav--primary" data-nc-element="primary-nav" data-content-field="navigation">
+                <squarespace:navigation navigationId="mainNavigation" template="header-nav" />
+              </nav>
+            </div>
+            <div data-nc-container="bottom-center">
+              
+              <a href="/" class="Header-branding" data-nc-element="branding" data-content-field="site-title">
+                {.section website}
+                  {.section logoImageUrl}
+                    <img src="{logoImageUrl}?format=1500w" alt="{siteTitle}" class="Header-branding-logo" />
+                  {.or}
+                    {siteTitle}
+                  {.end}
+                {.end}
+              </a>
+              {.section website}{.section siteTagLine}<div class="Header-tagline" data-nc-element="tagline">{@}</div>{.end}{.end}
+
+            </div>
+            <div data-nc-container="bottom-right">
+              
+              <nav class="Header-nav Header-nav--secondary" data-nc-element="secondary-nav" data-content-field="navigation">
+                <squarespace:navigation navigationId="secondaryNavigation" template="header-nav" />
+              </nav>
+
+            </div>
+          </div>
+        </header>
+
+
+        
+        {.if collection}{.if item}{.or}{.equal? collection.typeName "index"}{.or}
+          {.equal? collection.typeName "page"}
+            {.if collection.mainImage}
+              <section class="Intro{.if collection.mainImage} Intro--has-image{.end}" data-parallax-original-element data-parallax-id="{collection.id}">
+                <squarespace:block-field id="{collection.id}_intro" class="Intro-content{.if collection.mainImage} sqs-alternate-block-style-container{.end}" columns="12" label="Intro" />
+                {.section collection}
+                  {.section mainImage}
+                    <figure class="Intro-image" data-parallax-image-wrapper><img {@|image-meta} data-load="false" /></figure>
+                  {.end}
+                {.end}
+              </section>
+            {.end}
+          {.or}
+            <section class="Intro{.if collection.mainImage} Intro--has-image{.end}" data-parallax-original-element data-parallax-id="{collection.id}">
+              <squarespace:block-field id="{collection.id}_intro" class="Intro-content{.if collection.mainImage} sqs-alternate-block-style-container{.end}" columns="12" label="Intro" />
+              {.section collection}
+                {.section mainImage}
+                  <figure class="Intro-image" data-parallax-image-wrapper><img {@|image-meta} data-load="false" /></figure>
+                {.end}
+              {.end}
+            </section>
+          {.end}
+        {.end}{.end}{.end}
+
+        <main class="{.equal? collection.typeName "index"}Index{.or}Main{.if collection.typeName} Main--{collection.typeName}{.equal? collection.typeName "page"}{.or}{.if item}-item{.or}-list{.end}{.end}{.end}{.end}" {.equal? collection.typeName "index"}data-collection-id="{collection.id}"{.end}>
+          {.equal? collection.typeName "index"}
+            {squarespace.main-content}
+          {.or}
+            <section class="Main-content" data-content-field="main-content">
+              {squarespace.main-content}
+            </section>
+          {.end}
+        </main>
+
+
+      </div>
+
+      {@|apply footer.block}
+
+    </div>
+
+    <squarespace:script src="polyfills.js" combo="true" />
+    
+    <squarespace:script src="sqs-core.dev.js" combo="true" />
+    <squarespace:script src="sqs-controller.dev.js" combo="true" />
+    <squarespace:script src="site.js" combo="true" />
+
+    <squarespace:script src="plugins/ancillary-base.js" combo="true" />
+    <squarespace:script src="plugins/ancillary-collapse.js" combo="true" />
+    <squarespace:script src="plugins/mutation-observer.js" combo="true" />
+
+    <squarespace:script src="controllers/Ancillary.js" combo="true" />
+    <squarespace:script src="controllers/FooterBreakpoints.js" combo="true" />
+    <squarespace:script src="controllers/IndexGallery.js" combo="true" />
+    <squarespace:script src="controllers/IndexGalleryVideo.js" combo="true" />
+    <squarespace:script src="controllers/MobileOverlayFolders.js" combo="true" />
+    <squarespace:script src="controllers/MobileOffset.js" combo="true" />
+    <squarespace:script src="controllers/MobileOverlayToggle.js" combo="true" />
+    <squarespace:script src="controllers/NavigationState.js" combo="true" />
+    <squarespace:script src="controllers/Parallax.js" combo="true" />
+    <squarespace:script src="controllers/OverlayOffset.js" combo="true" />
+
+    {squarespace-footers}
+    
+  </body>
+</html> 
